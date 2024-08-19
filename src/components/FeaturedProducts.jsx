@@ -38,7 +38,7 @@ function FeaturedProducts() {
   };
 
   return (
-    <div className="container px-28 pt-28 mx-auto flex justify-start">
+    <div className="container px-28 pt-28 mx-auto">
       <div className="w-full">
         <div className="border-b border-base-300 pb-5">
           <h2 className="text-3xl font-medium tracking-wider capitalize">
