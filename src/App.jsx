@@ -10,7 +10,7 @@ import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
 import ErrorPage from "./pages/ErrorPage";
 import MainLayout from "./layouts/MainLayout";
-import ProductDetails from "./pages/productdetails";
+import ProductDetails from "./pages/ProductDetails";
 
 export const TokenContext = createContext("");
 export const UserContext = createContext("");

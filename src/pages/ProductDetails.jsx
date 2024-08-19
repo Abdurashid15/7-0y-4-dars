@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+      
 function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -32,7 +32,7 @@ function ProductDetails() {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="container mx-auto p-6 flex items-center justify-center">
+    <div className="md:container md:mx-auto p-6 flex items-center justify-center">
       <div className="flex flex-col md:flex-row items-start gap-8">
         <img
           src={product.image}
