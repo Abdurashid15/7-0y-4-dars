@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-      
+import { useCart } from '../components/CartContaxt';
+
 function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -8,6 +9,7 @@ function ProductDetails() {
   const [error, setError] = useState(null);
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedAmount, setSelectedAmount] = useState(1);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     fetch(`https://strapi-store-server.onrender.com/api/products/${id}`)
@@ -15,7 +17,7 @@ function ProductDetails() {
       .then((data) => {
         if (data && data.data) {
           setProduct(data.data.attributes);
-          setSelectedColor(data.data.attributes.colors[0] || ''); // Set default color
+          setSelectedColor(data.data.attributes.colors[0] || '');
         } else {
           setError("Product not found");
         }
@@ -30,6 +32,19 @@ function ProductDetails() {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
+
+  const handleAddToCart = () => {
+    const productToAdd = {
+      productID: id,
+      title: product.title,
+      price: parseInt(product.price, 10),
+      productColor: selectedColor,
+      amount: selectedAmount,
+      company: product.company,
+      image: product.image,
+    };
+    addToCart(productToAdd);
+  };
 
   return (
     <div className="md:container md:mx-auto p-6 flex items-center justify-center">
@@ -72,7 +87,10 @@ function ProductDetails() {
               ))}
             </select>
           </div>
-          <button className="mt-6 bg-purple-600 text-white px-4 py-2 rounded">
+          <button
+            className="mt-6 bg-purple-600 text-white px-4 py-2 rounded"
+            onClick={handleAddToCart}
+          >
             Add to Bag
           </button>
         </div>
