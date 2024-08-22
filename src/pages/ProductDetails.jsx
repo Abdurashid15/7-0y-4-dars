@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from '../components/CartContaxt';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ProductDetails() {
   const { id } = useParams();
@@ -30,7 +32,12 @@ function ProductDetails() {
       });
   }, [id]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return (
+    <div className="flex items-center justify-center h-screen">
+      <span className="loading loading-infinity loading-lg"></span>
+    </div>
+  );
+
   if (error) return <div>{error}</div>;
 
   const handleAddToCart = () => {
@@ -44,6 +51,7 @@ function ProductDetails() {
       image: product.image,
     };
     addToCart(productToAdd);
+    toast.success("Product added to cart!");
   };
 
   return (
@@ -95,6 +103,7 @@ function ProductDetails() {
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

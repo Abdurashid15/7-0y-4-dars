@@ -1,8 +1,11 @@
 import React from 'react'
+import ProductFilter from '../components/ProductFilter'
 
 function Product() {
   return (
-    <div>Product</div>
+    <div>
+      <ProductFilter></ProductFilter>
+    </div>
   )
 }
 
